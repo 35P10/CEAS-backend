@@ -1,11 +1,13 @@
 ﻿nav {
-    background-color: #000;
+    background-color: var(--color-background-2);
     padding: 10px;
-    text-align: center;
-    position: fixed;
     width: 100%;
-    top: 0;
-    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
 }
 
 nav a {
@@ -13,21 +15,16 @@ nav a {
     color: #fff;
 }
 
-h1 {
-    margin: 0;
-    display: inline-block;
-}
-
 ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
-    display: inline-block;
+    margin-left: auto;
+    display: block;
+    height: 100%;
 }
 
 li {
-    margin: 0 10px;
-    display: inline-block;
+    margin: 0;
+    display: block;
 }
 
 li a {
@@ -36,29 +33,14 @@ li a {
 }
 
 li a:hover {
-    color: #00a86b;
+    color: var(--color-primary);
 }
 
-body {
-    margin-top: 50px; 
-    font-family: 'Arial', sans-serif;
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-}
-
-body {
-    margin-top: 50px; 
-    font-family: 'Arial', sans-serif;
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+.icon-github {
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-image: url('icons/github-mark-white.svg');
+    background-position: center;
+    background-size: cover;
 }

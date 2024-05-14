@@ -1,11 +1,25 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+:root {
+    --color-primary: #2b88d8;
+    --color-primary-alt: #005a9e;
+    --color-text: #f4f4f4;
+    --color-background: #0A0A0A;
+    --color-background-2: #141414;
+    --color-background-3: #1F1F1F;
+}
+
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
 .monaco-editor-container { /* for all editor instances */
-    height: 200px;
+    height: 100%;
+    width: 100%;
     text-align: left;
 }
 

@@ -1,4 +1,5 @@
 @page "/"
+
 @inject HttpClient httpClient
 
 @using FrontEnd.Services.Contracts;
@@ -9,78 +10,73 @@
 @using System.Text.Json
 @using FrontEnd.Models
 
-<div class="centered-content">
-    <h3>Compiler</h3>
-
-    <div class="column-container">
+<div class="content">
+    <div class="code-section">
         <div class="left-column">
-            <div class="column-container">
-                <div class="left-column">
+            <div class="editor-config">
+                <div class="editor-config-settingitem">
                     <label for="idCodeSelect">Select language:</label>
                     <select id="idCodeSelect" @onchange="HandleIdCodeChange">
                         <option value="1">Python</option>
                         <option value="3">C#</option>
                     </select>
                 </div>
-                <div class="right-column">
-                    <div style="margin:5px 0;">
-                        Select theme:
-                        <select @onchange="ChangeTheme">
+                <div class="editor-config-settingitem">
+                    <label for="idThemeSelect">Select theme:</label>
+                        <select id="idThemeSelect"
+                            @onchange="ChangeTheme">
                             <option value="vs">Visual Studio</option>
                             <option value="vs-dark">Visual Studio Dark</option>
                             <option value="hc-black">High Contrast Black</option>
                         </select>
-                    </div>
                 </div>
+                <button @onclick="RunCompiler">Run</button>
             </div>
 
-
-
-
-            <StandaloneCodeEditor @ref="_editor" ConstructionOptions="EditorConstructionOptions"
+            <div class="editor"> 
+                <StandaloneCodeEditor @ref="_editor" ConstructionOptions="EditorConstructionOptions"
                 OnDidInit="EditorOnDidInit" OnDidChangeModelContent="HandleInput" />
-
-            <div >
-                <strong>Code Status</strong>
-                <div style="text-align: left;">
-                    <strong>Error: @sintaxisModel.errors</strong>
-                    <ul>
-                        @foreach (var errorMsg in sintaxisModel.errorMsg)
-                        {
-                            <li>@errorMsg</li>
-                        }
-                    </ul>
-                </div>
-                <div style="text-align: left;">
-                    <strong>Obs: @sintaxisModel.obs</strong>
-                    <ul>
-                        @foreach (var obMsg in sintaxisModel.obsMsg)
-                        {
-                            <li>@obMsg</li>
-                        }
-                    </ul>
-                </div>
             </div>
+
         </div>
 
         <div class="right-column">
-            <div>
-                <div class="column-container">
-                    <div class="left-column"style="text-align: left;">
-                        <strong>Output:</strong>
-                    </div>
-                    <div class="right-column" style="text-align: right;" >
-                        <button @onclick="RunCompiler" style="margin-right: 30px;">Run</button>
-                    </div>
-                
+                <div class="editor-config">
+                    <h3>Output:</h3>
                 </div>
-                
-                <!--<p>@outputModel.idResponse</p>-->
-                <p> </p>
+
+            <div class="editor">
                 <StandaloneCodeEditor @ref="_output" ConstructionOptions="OutputConstructionOptions" />
             </div>
+        </div>
+    </div>
 
-            
+    <div class="code-status">
+        <div class="code-status-resume">
+            <p>Code Status: </p>
+            <p class="code-status-sub"><span class="icon icon-error"></span>@sintaxisModel.errors</p>
+            <p class="code-status-sub"><span class="icon icon-warming"></span>@sintaxisModel.obs</p>
+        </div>
+        <div style="text-align: left;">
+            <ul>
+                @foreach (var errorMsg in sintaxisModel.errorMsg)
+                {
+                    <li>
+                        <p class="code-status-sub"><span class="icon icon-error"></span>@errorMsg</p>
+
+                    </li>
+                }
+            </ul>
+        </div>
+        <div style="text-align: left;">
+            <ul>
+                @foreach (var obMsg in sintaxisModel.obsMsg)
+                {
+                    <li>
+                        <p class="code-status-sub"><span class="icon icon-warming"></span>@obMsg</p>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 </div>
@@ -143,6 +139,29 @@ GlyphMarginClassName = "decorationGlyphMarginC1ass"
         }
 
         await BlazorMonaco.Editor.Global.SetModelLanguage(jsRuntime, model, codelang);
+
+        switch (idCode)
+        {
+            case 1:
+                SetExampleHelloWordPython();
+                break;
+            case 3:
+                SetExampleHelloWordCSharp();
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    private async void SetExampleHelloWordPython()
+    {
+        await _editor.SetValue("print(\"Hello, World!\")");
+    }
+
+    private async void SetExampleHelloWordCSharp()
+    {
+        await _editor.SetValue("public class Program \n{\n\t public static void Main(string[] args) \n\t { \n\t\t System.Console.WriteLine(\"Hello, World!\");\n\t }\n }");
     }
 
     private async Task HandleInput(ModelContentChangedEvent e)
@@ -196,13 +215,15 @@ GlyphMarginClassName = "decorationGlyphMarginC1ass"
     {
         return new StandaloneEditorConstructionOptions
             {
+                AutomaticLayout = true,
                 ReadOnly = true,
                 Contextmenu = false,
                 Language = "plaintext",
                 Value = "Bienvenido a CEAS!",
                 LineNumbers = "off",
                 GlyphMargin = false,
-                Folding = false
+                Folding = false,
+                Theme = "vs-dark"
             };
     }
 

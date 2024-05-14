@@ -10,6 +10,7 @@
     <PackageReference Include="BlazorMonaco" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.10" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Fast.Components.FluentUI.Icons" Version="3.7.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.0" />
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

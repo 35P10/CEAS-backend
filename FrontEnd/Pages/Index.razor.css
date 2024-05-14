@@ -1,60 +1,43 @@
-﻿body {
-    margin-top: 50px; 
-    font-family: 'Arial', sans-serif;
-    background-color: #000;
-    color: #fff;
+﻿
+.content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.centered-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.code-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: auto;
-    margin-top: 10vh; 
+    padding: 8px;
+    flex: 1;
+    gap: 8px;
 }
 
-.column-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.editor {
     width: 100%;
+    height: 80%;
 }
 
 .left-column, .right-column {
-    width: 48%; /* Ajusta el ancho según tus necesidades */
+    height: 40%;
 }
 
-h3 {
-    color: #00a86b;
+
+.editor-config {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0px;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
+.editor-config-settingitem
+{
+   display: flex;
+   flex-direction: column;
 }
 
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
 
 button {
-    background-color: #00a86b;
+    background-color: var(--color-primary);
     color: #fff;
     padding: 10px;
     border: none;
@@ -62,15 +45,17 @@ button {
     cursor: pointer;
     font-size: 16px;
     width: 150px;
+    margin-left: auto;
 }
 
 button:hover {
-    background-color: #008553;
+    background-color: var(--color-primary-alt);
 }
 
-strong {
-    display: block;
-    margin-top: 10px;
+.code-status-sub {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 ul {
@@ -83,10 +68,57 @@ ul li {
 }
 
 .monaco-editor-container {
-    height: 200px;
+    height: 100%;
+    width: 100%;
     text-align: left;
 }
 
-#my-editor-instance-id {
-    height: 100px;
+
+.code-status {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    background-color: var(--color-background-2);
+    padding:8px;
+}
+
+
+.code-status-resume {
+    display: flex;
+    gap: 16px;
+    font-size: 16px;
+}
+
+.icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-warming {
+    background-image: url('icons/incidentTriangle.svg');
+}
+
+.icon-error {
+    background-image: url('icons/statuserrorfull.svg');
+}
+
+@media (min-width: 767px) {
+    .code-section {
+        flex-flow: row;
+        padding: 32px;
+        gap: 32px;
+    }
+
+    .left-column, .right-column {
+        width: 100%;
+        height: 100%;
+    }
+
+    .editor {
+        height: contain;
+    }
 }

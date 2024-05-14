@@ -1,6 +1,7 @@
 ﻿using FrontEnd.Services.Contracts;
 using FrontEnd.Services.Repository;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Fast.Components.FluentUI;
 
 namespace FrontEnd
 {
@@ -14,8 +15,8 @@ namespace FrontEnd
 
             // Registra CEASRepo con la fábrica que toma dos parámetros
             var apiUri = hostEnvironment.IsDevelopment() ?
-                configuration.GetValue<string>("DebugSettings:ApiUri", "http://localhost:5071/")  :
-                configuration.GetValue<string>("ReleaseSettings:ApiUri", "http://35.222.131.218:8080/") ;
+                configuration.GetValue<string>("DebugSettings:ApiUri", "https://35p10-ceas.azurewebsites.net/")  :
+                configuration.GetValue<string>("ReleaseSettings:ApiUri", "https://35p10-ceas.azurewebsites.net/") ;
 
             services.AddTransient<ICEAS>(provider =>
             {
@@ -23,7 +24,6 @@ namespace FrontEnd
 
                 return new CEASRepo(apiUri, httpClient);
             });
-
             return services;
         }
     }
